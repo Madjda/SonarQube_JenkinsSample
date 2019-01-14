@@ -17,12 +17,11 @@ gradle javadoc
     stage('Code Analysis') {
       parallel {
         stage('Code Analysis') {
-          
           steps {
-    withSonarQubeEnv('sonarqube') {
-      sh 'sonar-scanner'
-                                            }
-            
+            withSonarQubeEnv('sonarqube') {
+              sh 'sonar-scanner'
+            }
+
           }
         }
         stage('Test Reporting') {
@@ -35,6 +34,11 @@ gradle javadoc
     stage('Deployment') {
       steps {
         sh 'gradle uploadArchives'
+      }
+    }
+    stage('Slack Notification') {
+      steps {
+        slackSend(channel: 'gradle', message: 'project deployed')
       }
     }
   }
