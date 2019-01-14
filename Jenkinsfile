@@ -35,7 +35,16 @@ gradle jar
       }
     }
     stage('Deployment') {
+      
+      when {
+        not {
+          changeRequest target: 'master'
+        }
+
+      }
+      
       steps {
+        
         sh 'gradle uploadArchives'
       }
     }
