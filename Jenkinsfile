@@ -13,7 +13,7 @@ gradle jar
     }
     stage('Mail Notification') {
       steps {
-        mail(subject: 'Build Failed', body: 'This Build is failed', bcc: 'fm_zerrouk@esi.dz')
+        mail(subject: 'Build Success', body: 'This Build is successful', bcc: 'fm_zerrouk@esi.dz')
       }
     }
     stage('Code Analysis') {
