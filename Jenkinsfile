@@ -38,7 +38,7 @@ gradle javadoc
     }
     stage('Slack Notification') {
       steps {
-        slackSend(channel: 'gradle', message: 'project deployed')
+        slackSend(channel: 'gradle', message: 'project deployed', token: 'EW55FbxRBReWvW4a2TnDB7Hw')
       }
     }
   }
