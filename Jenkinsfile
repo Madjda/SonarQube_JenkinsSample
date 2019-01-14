@@ -14,5 +14,24 @@ gradle javadoc
         mail(subject: 'Build Failed', body: 'This Build is failed', bcc: 'fm_zerrouk@esi.dz')
       }
     }
+    stage('Code Analysis') {
+      parallel {
+        stage('Code Analysis') {
+          steps {
+            echo 'hey'
+          }
+        }
+        stage('Test Reporting') {
+          steps {
+            jacoco()
+          }
+        }
+      }
+    }
+    stage('Deployment') {
+      steps {
+        sh 'gradle uploadArchives'
+      }
+    }
   }
 }
