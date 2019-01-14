@@ -5,8 +5,10 @@ pipeline {
       steps {
         sh '''gradle build
 gradle javadoc
+gradle jar
 '''
         archiveArtifacts 'build/libs/*.jar'
+        archiveArtifacts 'build/docs/javadoc/'
       }
     }
     stage('Mail Notification') {
@@ -22,6 +24,7 @@ gradle javadoc
               sh 'sonar-scanner'
             }
 
+            waitForQualityGate true
           }
         }
         stage('Test Reporting') {
