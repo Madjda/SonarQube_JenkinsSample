@@ -4,7 +4,14 @@ pipeline {
     stage('Build') {
       steps {
         sh '''gradle build
-gradle javadoc'''
+gradle javadoc
+'''
+        archiveArtifacts 'build/libs/*.jar'
+      }
+    }
+    stage('Mail Notification') {
+      steps {
+        mail(subject: 'Build Failed', body: 'This Build is failed', bcc: 'fm_zerrouk@esi.dz')
       }
     }
   }
