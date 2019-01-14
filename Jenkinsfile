@@ -17,8 +17,13 @@ gradle javadoc
     stage('Code Analysis') {
       parallel {
         stage('Code Analysis') {
+          
           steps {
-            echo 'hey'
+         def scannerHome = tool 'SonarQube Scanner 2.8';
+    withSonarQubeEnv('My SonarQube Server') {
+      sh "${scannerHome}/bin/sonar-scanner"
+                                            }
+            
           }
         }
         stage('Test Reporting') {
